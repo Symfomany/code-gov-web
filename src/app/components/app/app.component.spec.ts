@@ -32,21 +32,20 @@ describe('AgencyComponent', () => {
         TruncatePipe
       ],
       imports: [
-        Angulartics2Module.forRoot(),
+        Angulartics2Module.forRoot([Angulartics2GoogleTagManager]),
         HttpModule,
         RouterModule.forRoot([])
       ],
       providers: [
         AgencyService,
         Angulartics2,
-        Angulartics2GoogleTagManager,
+        // Angulartics2GoogleTagManager,
         ReposService,
         SeoService,
         StateService,
         {provide: APP_BASE_HREF, useValue: '/'}
       ]
     });
-
     this.fixture = TestBed.createComponent(AppComponent);
     this.appComponent = this.fixture.componentInstance;
   });

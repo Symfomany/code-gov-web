@@ -6,6 +6,7 @@ const webpack = require('webpack');
 const helpers = require('./helpers');
 const webpackMerge = require('webpack-merge');
 
+const ngToolsWebpack = require('@ngtools/webpack');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const AssetsPlugin = require('assets-webpack-plugin');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
@@ -18,9 +19,6 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const DedupePlugin = require('webpack/lib/optimize/DedupePlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const IgnorePlugin = require('webpack/lib/IgnorePlugin');
-const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplacementPlugin');
-const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const CriticalCssPlugin = require('./critical-css-plugin');
 const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
@@ -49,6 +47,13 @@ module.exports = function (options) {
    * Common Plugins
    */
   const commonPlugins = [
+    new ngToolsWebpack.AotPlugin({
+      tsConfigPath: './tsconfig.json',
+      entryModule: './src/app/app.module#AppModule',
+      mainPath: './src/main.browser.ts',
+      genDir: 'ngcompiled',
+      skipCodeGeneration: isProd ? false : true
+    }),
     new AssetsPlugin({
       path: helpers.root('dist'),
       filename: 'webpack-assets.json',
@@ -131,10 +136,6 @@ module.exports = function (options) {
       },
       comments: false
     }),
-    new NormalModuleReplacementPlugin(
-      /angular2-hmr/,
-      helpers.root('config/modules/angular2-hmr-prod.js')
-    ),
     /**
      * Inline critical-path CSS in index.html, and asynchronously load remainder of stylesheet.
      */
@@ -177,12 +178,7 @@ module.exports = function (options) {
       rules: [
         {
           test: /\.ts$/,
-          loaders: [
-           '@angularclass/hmr-loader?pretty=' + !isProd + '&prod=' + isProd,
-           'awesome-typescript-loader',
-           'angular2-template-loader'
-          ],
-          exclude: [/\.(spec|e2e)\.ts$/]
+          loader: '@ngtools/webpack'
         },
         {
           test: /\.json$/,

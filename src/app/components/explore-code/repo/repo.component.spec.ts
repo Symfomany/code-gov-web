@@ -35,7 +35,7 @@ describe('RepoComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        Angulartics2Module.forRoot(),
+        Angulartics2Module.forRoot([]),
         CommonModule,
         HttpModule,
         // This hack is needed because there is a routerLink in the template

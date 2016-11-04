@@ -100,18 +100,18 @@ module.exports = function (options) {
          */
         {
           test: /\.ts$/,
-          loader: 'awesome-typescript-loader',
-          query: {
-            // use inline sourcemaps for "karma-remap-coverage" reporter
-            sourceMap: false,
-            inlineSourceMap: true,
-            compilerOptions: {
+          loaders: ['awesome-typescript-loader', 'angular2-template-loader'],
+          // query: {
+          //   // use inline sourcemaps for "karma-remap-coverage" reporter
+          //   sourceMap: false,
+          //   inlineSourceMap: true,
+          //   compilerOptions: {
 
-              // Remove TypeScript helpers to be injected
-              // below by DefinePlugin
-              removeComments: true
-            }
-          },
+          //     // Remove TypeScript helpers to be injected
+          //     // below by DefinePlugin
+          //     removeComments: true
+          //   }
+          // },
           exclude: [/\.e2e\.ts$/]
         },
 
@@ -164,7 +164,7 @@ module.exports = function (options) {
          */
         {
           enforce: 'post',
-          test: /\.(js|ts)$/,
+          test: /\.(js)$/,
           loader: 'istanbul-instrumenter-loader',
           include: helpers.root('src'),
           exclude: [

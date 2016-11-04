@@ -48,16 +48,28 @@ testing.TestBed.initTestEnvironment(
  * any file that ends with spec.ts and get its path. By passing in true
  * we say do this recursively
  */
-var testContext = require.context('../src', true, /\.spec\.ts/);
+// var testContext = require.context('../', true, /\.spec\.ts/);
 
-/*
- * get all the files, for each file, call the context function
- * that will require the file and load it up here. Context will
- * loop and require those spec files here
- */
-function requireAll(requireContext) {
-  return requireContext.keys().map(requireContext);
-}
+// /*
+//  * get all the files, for each file, call the context function
+//  * that will require the file and load it up here. Context will
+//  * loop and require those spec files here
+//  */
+// function requireAll(requireContext) {
+//   return requireContext.keys().map(requireContext);
+// }
 
-// requires and returns all modules that match
-var modules = requireAll(testContext);
+// // requires and returns all modules that match
+// var modules = requireAll(testContext);
+
+
+require('../src/app/components/app/app.component.spec.ts');
+require('../src/app/components/explore-code/agency/agency.component.spec.ts');
+require('../src/app/components/explore-code/repo/repo.component.spec.ts');
+require('../src/app/components/home/home.component.spec.ts');
+require('../src/app/components/modal/modal.component.spec.ts');
+require('../src/app/directives/external-link/external-link.directive.spec.ts');
+require('../src/app/directives/toggle-menu/toggle-menu.directive.spec.ts');
+require('../src/app/pipes/is-defined/is-defined.pipe.spec.ts');
+require('../src/app/pipes/truncate/truncate.pipe.spec.ts');
+require('../src/app/services/mobile/mobile.service.spec.ts');

@@ -19,7 +19,7 @@ describe('ModalComponent', () => {
         ModalComponent
       ],
       imports: [
-        Angulartics2Module.forRoot(),
+        Angulartics2Module.forRoot([]),
         RouterModule.forRoot([])
       ],
       providers: [

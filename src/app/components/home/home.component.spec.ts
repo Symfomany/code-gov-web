@@ -8,7 +8,7 @@ import { Angulartics2, Angulartics2Module } from 'angulartics2';
 import { BannerArtComponent } from './banner-art';
 import { ExternalLinkDirective } from '../../directives/external-link';
 import { HomeComponent } from './';
-import { ModalComponent } from '../modal';
+import { ModalModule } from '../modal';
 import { ModalService } from '../../services/modal';
 import { SeoService } from '../../services/seo';
 import { StateService } from '../../services/state';
@@ -20,11 +20,11 @@ describe('HomeComponent', () => {
       declarations: [
         BannerArtComponent,
         ExternalLinkDirective,
-        HomeComponent,
-        ModalComponent
+        HomeComponent
       ],
       imports: [
-        Angulartics2Module.forRoot(),
+        ModalModule,
+        Angulartics2Module.forRoot([]),
         RouterModule.forRoot([])
       ],
       providers: [
