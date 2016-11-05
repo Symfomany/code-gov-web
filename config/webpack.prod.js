@@ -220,7 +220,9 @@ module.exports = function (env) {
       /**
        * Inline critical-path CSS in index.html, and asynchronously load remainder of stylesheet.
        */
-      new CriticalCssPlugin(),
+      new CriticalCssPlugin({
+        src: 'index.html'
+      }),
 
       /**
        * Plugin LoaderOptionsPlugin (experimental)
