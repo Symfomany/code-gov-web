@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 import { AgencyService, Agency } from '../../../services/agency';
 import { ReposService } from '../../../services/repos';
 import { LanguageIconPipe } from '../../../pipes/language-icon';
@@ -13,10 +14,11 @@ import { TruncatePipe } from '../../../pipes/truncate';
   template: require('./agency.template.html')
 })
 
-export class AgencyComponent {
+export class AgencyComponent implements OnInit, OnDestroy {
   agency: Agency;
   public hasRepos: boolean = false;
   public repos;
+  private eventSub: Subscription;
 
   constructor(
     private agencyService: AgencyService,
@@ -28,10 +30,11 @@ export class AgencyComponent {
   ngOnDestroy() {
     this.hasRepos = false;
     this.agency = null;
+    this.eventSub.unsubscribe();
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.eventSub = this.route.params.subscribe(params => {
 
       let id = params['id'];
 
