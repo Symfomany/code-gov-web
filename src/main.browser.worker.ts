@@ -21,7 +21,10 @@ import { AppModule } from './app';
   platformWorkerAppDynamic()
     .bootstrapModule(AppModule)
     .then(decorateModuleRef)
-    .then((v) => {console.log('bootstrapped!', v)})
+    .then((v) => {
+      performance.mark('interactive');
+      console.log('bootstrapped!', v)
+    })
     .catch(err => console.error(err));
 
 // }
