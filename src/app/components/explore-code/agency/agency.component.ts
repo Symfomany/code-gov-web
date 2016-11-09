@@ -41,9 +41,9 @@ export class AgencyComponent implements OnInit, OnDestroy {
       this.agency = this.agencyService.getAgency(id);
       this.agencyRepos();
 
-      this.seoService.setTitle(this.agency.name, true);
-      this.seoService.setMetaDescription('Browse code from the ' + this.agency.name);
-      this.seoService.setMetaRobots('Index, Follow');
+      // this.seoService.setTitle(this.agency.name, true);
+      // this.seoService.setMetaDescription('Browse code from the ' + this.agency.name);
+      // this.seoService.setMetaRobots('Index, Follow');
     });
   }
 

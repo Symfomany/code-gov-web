@@ -39,7 +39,7 @@ module.exports = function (options) {
   // TODO: Used by `@angularclass/hmr-loader` below. Feels bad, might
   // want to upgrade to latest hmr-loader and pull out env dependency
   // (or move this definition out of common)
-  isProd = ['production', 'staging'].includes(options.env);
+  isProd = ['production', 'staging'].indexOf(options.env) > -1;
 
   return {
 
@@ -62,7 +62,7 @@ module.exports = function (options) {
     entry: {
       'polyfills': './src/polyfills.browser.ts',
       'vendor': './src/vendor.browser.ts',
-      'main': './src/main.browser.ts'
+      'main': './src/main.browser.worker-ui.ts'
     },
 
     resolve: {

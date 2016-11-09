@@ -8,8 +8,8 @@ import { SeoService } from '../../../../../services/seo';
 export class IntroductionComponent {
 
   constructor(private seoService: SeoService) {
-    seoService.setTitle('Policy Implementation Introduction', true);
-    seoService.setMetaDescription('Start here for an overview of the Federal Open Source Code Policy.');
-    seoService.setMetaRobots('Index, Follow');
+    // seoService.setTitle('Policy Implementation Introduction', true);
+    // seoService.setMetaDescription('Start here for an overview of the Federal Open Source Code Policy.');
+    // seoService.setMetaRobots('Index, Follow');
   }
 }

@@ -38,7 +38,7 @@ const METADATA = webpackMerge(commonConfig({ env: ENV }).metadata, {
 });
 
 module.exports = function (env) {
-  return webpackMerge(commonConfig({ env: ENV }), {
+  return [webpackMerge(commonConfig({ env: ENV }), {
 
     /**
      * Developer tool to enhance debugging
@@ -287,5 +287,16 @@ module.exports = function (env) {
       setImmediate: false
     }
 
-  });
+  }), {
+    module: commonConfig({ env: ENV }).module,
+    resolve: commonConfig({ env: ENV }).resolve,
+    target: 'webworker',
+    entry: {
+      'worker': 'main.browser.worker.ts'
+    },
+    output: {
+      filename: 'main_worker.bundle.js',
+      path: helpers.root('dist')
+    }
+  }];
 }

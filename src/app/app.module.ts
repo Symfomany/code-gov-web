@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 import { AuthHttp, AuthConfig, AUTH_PROVIDERS, provideAuth} from 'angular2-jwt';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule } from '@angular/platform-webworker';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -48,7 +49,8 @@ const APP_PROVIDERS = [
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: true })
+    RouterModule.forRoot(ROUTES, { useHash: true }),
+    WorkerAppModule
   ],
   declarations: [
     APP_COMPONENTS,
@@ -61,7 +63,8 @@ const APP_PROVIDERS = [
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
     {provide: LocationStrategy, useClass: HashLocationStrategy},
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    WORKER_APP_LOCATION_PROVIDERS
   ],
   bootstrap: [ AppComponent ]
 })

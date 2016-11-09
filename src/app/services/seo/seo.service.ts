@@ -16,10 +16,10 @@ export class SeoService {
   constructor(titleService: Title) {
     this.baseTitle = '· Code.gov';
     this.titleService = titleService;
-    this.DOM = getDOM();
-    this.headElement = this.DOM.query('head');
-    this.metaDescription = this.getOrCreateMetaElement('description');
-    this.robots = this.getOrCreateMetaElement('robots');
+    // this.DOM = getDOM();
+    // this.headElement = this.DOM.query('head');
+    // this.metaDescription = this.getOrCreateMetaElement('description');
+    // this.robots = this.getOrCreateMetaElement('robots');
   }
 
   public getTitle(): string {

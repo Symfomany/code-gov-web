@@ -11,7 +11,7 @@ import { MobileService } from '../../services/mobile';
 export class ToggleMenuDirective {
   toggle: boolean;
   constructor(private el: ElementRef, private mobileService: MobileService) {
-    this.toggle = JSON.parse(this.el.nativeElement.getAttribute('aria-pressed'));
+    // this.toggle = JSON.parse(this.el.nativeElement.getAttribute('aria-pressed'));
   }
 
   onClick(event: any) {
@@ -22,6 +22,6 @@ export class ToggleMenuDirective {
 
   togglePressed() {
     this.toggle = !this.toggle;
-    this.el.nativeElement.setAttribute('aria-pressed', this.toggle);
+    // this.el.nativeElement.setAttribute('aria-pressed', this.toggle);
   }
 }
