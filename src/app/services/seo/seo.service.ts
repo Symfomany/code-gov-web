@@ -1,61 +1,35 @@
 import { Injectable } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
+import { MessageBus } from '@angular/platform-webworker';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 
 export class SeoService {
+  private workerChannel: Subject<any>;
 
-  private baseTitle: string;
-  private titleService: Title;
-  private headElement: HTMLElement;
-  private metaDescription: HTMLElement;
-  private robots: HTMLElement;
-  private DOM: any;
-
-  constructor(titleService: Title) {
-    this.baseTitle = '· Code.gov';
-    this.titleService = titleService;
-    // this.DOM = getDOM();
-    // this.headElement = this.DOM.query('head');
-    // this.metaDescription = this.getOrCreateMetaElement('description');
-    // this.robots = this.getOrCreateMetaElement('robots');
-  }
-
-  public getTitle(): string {
-    return this.titleService.getTitle();
+  constructor(messageBus: MessageBus) {
+    messageBus.initChannel('seo.service');
+    this.workerChannel = messageBus.to('seo.service');
   }
 
   public setTitle(newTitle: string, baseTitle = false) {
-    if (baseTitle === true)
-      newTitle += ' · Code.gov';
-    this.titleService.setTitle(newTitle);
-  }
-
-  public getMetaDescription(): string {
-    return this.metaDescription.getAttribute('content');
+    this.workerChannel.next({
+      command: 'setTitle',
+      data: { newTitle, baseTitle}
+    });
   }
 
   public setMetaDescription(description: string) {
-    this.metaDescription.setAttribute('content', description);
+    this.workerChannel.next({
+      command: 'setMetaDescription',
+      data: { description }
+    });
   }
 
-  public getMetaRobots(): string {
-    return this.robots.getAttribute('content');
-  }
-
-  public setMetaRobots(robots: string) {
-    this.robots.setAttribute('content', robots);
-  }
-
-  private getOrCreateMetaElement(name: string): HTMLElement {
-    let el: HTMLElement;
-    el = this.DOM.query('meta[name=' + name + ']');
-    if (el === null) {
-      el = this.DOM.createElement('meta');
-      el.setAttribute('name', name);
-      this.headElement.appendChild(el);
-    }
-    return el;
+  public setMetaRobots(content: string) {
+    this.workerChannel.next({
+      command: 'setMetaRobots',
+      data: { content }
+    });
   }
 }

@@ -15,8 +15,8 @@ export class PrivacyPolicyComponent {
     public stateService: StateService
   ) {
     this.stateService.set('section', 'privacy-policy');
-    // this.seoService.setTitle('Privacy Policy', true);
-    // this.seoService.setMetaDescription('Learn about how Code.gov is using cookies and analytics.');
-    // this.seoService.setMetaRobots('Index, Follow');
+    this.seoService.setTitle('Privacy Policy', true);
+    this.seoService.setMetaDescription('Learn about how Code.gov is using cookies and analytics.');
+    this.seoService.setMetaRobots('Index, Follow');
   }
 }
